@@ -11,12 +11,12 @@ update member set is_log_off=1 where deleted=1;
 
 
 #成员测试数据
-INSERT INTO member (id,member_no,balance,nickname,deleted, tenant_id,phone,parent_id) VALUES
-	 (101,'xq test no1',100,'xq测试成员1',0,1,'13100250121',NULL),
-	 (1011,'xq test no11',200,'xq测试成员11',0,1,'13100250122','101'),
-	 (1012,'xq test no12',300,'xq测试成员12',0,1,'13100250123','101'),
-	 (10111,'xq test no111',400,'xq测试成员111',0,1,'13100250124','1011'),
-	 (10112,'xq test no112',500,'xq测试成员112',0,1,'13100250125','1011')
+INSERT INTO member (id,member_no,balance,nickname,deleted, tenant_id,phone,parent_id,phone,invitation_code) VALUES
+	 (101,'xq test no1',100,'xq测试成员1',0,1,'13100250121',NULL,'13100250101','inv1'),
+	 (1011,'xq test no11',200,'xq测试成员11',0,1,'13100250122','101','13100250102','inv2'),
+	 (1012,'xq test no12',300,'xq测试成员12',0,1,'13100250123','101','13100250103','inv3'),
+	 (10111,'xq test no111',400,'xq测试成员111',0,1,'13100250124','1011','13100250104','inv4'),
+	 (10112,'xq test no112',500,'xq测试成员112',0,1,'13100250125','1011','13100250105','inv5')
 ;
 
 
