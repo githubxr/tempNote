@@ -195,23 +195,7 @@ nacos不同环境配置文件指定方式
 
 &#x09;其中的active也是在yml中配置的a.b.c.active变量
 
-
-
-
-
-##### Spring Append
-
-- @CahcheAble（16/0525）
-
-  - 描述：不看源码我都能猜到是注解标记切入点 + 环绕前查缓存/前后存缓存...
-  - 可选择缓存容器：
-    - JVM（Simple模式）
-    - Redis（分布式一致性）
-  - 用法：
-    - yaml中配置（缓存容器类别/缓存参数配置等等...）【spring.cache.type/caffeine(redis)...】
-    - 相关pom依赖引入
-
-  - 很简单，唯一补充说明的是，欸屁里k婶 得加@EnableCaching 开启
+- 
 
 
 
@@ -250,22 +234,44 @@ nacos不同环境配置文件指定方式
   - 销毁 
     - @PreDestroy / @Destroy 自定义’临终操作‘
     - spring容器销毁Bean
-- SQL**补充**
-  - left join时，右表过滤条件要全写到on，否则会退化为内连接
-    - 虽然数据库会优化，但是为了可靠的‘先过滤再联表’，以及‘可读性’ 写在on里最合适；
-  -  
 - 
-- **Redisson**
-  - 最长等待时间为：Redisson 全局配置：`lockWatchdogTimeout`（默认 30s）
-  - 看门🐕：会在业务完成时自动释放🔒，而非死等到最大持有期限
-  - rLock.lock()：
-    -  无参：自动加看门狗
-    -  传参：只能传leaseTime，会写死释放时间，不推荐；
-    -  
-  - rLock.tryLock()：推荐
-    - waitTime：获取最多等多久🔒
-    - leaseTime：固定释放🔒时间（会关看门狗）
-    - 推荐写法：tryLock(waitTime, timeUnit)
+- ##### Spring Append
+  
+  - @CahcheAble（16/0525）
+  
+    - 描述：不看源码我都能猜到是注解标记切入点 + 环绕前查缓存/前后存缓存...
+    - 可选择缓存容器：
+      - JVM（Simple模式）
+      - Redis（分布式一致性）
+    - 用法：
+      - yaml中配置（缓存容器类别/缓存参数配置等等...）【spring.cache.type/caffeine(redis)...】
+      - 相关pom依赖引入
+  
+    - 很简单，唯一补充说明的是，欸屁里k婶 得加@EnableCaching 开启
+- 
+- 基础 **Chain / Filter** 要点
+
+  -  
+
+
+
+
+
+
+##### 分布式锁要点：**看门🐕**
+
+- 最长等待时间为：Redisson 全局配置：`lockWatchdogTimeout`（默认 30s）
+- 看门🐕：会在业务完成时自动释放🔒，**避免**死等到最大持有期限
+- rLock.lock()：
+  -  无参：自动加看门狗
+  -  传参：只能传leaseTime，会写死释放时间，不推荐；
+  -  
+- rLock.tryLock()：推荐
+  - waitTime：获取最多等多久🔒
+  - leaseTime：固定释放🔒时间（会关看门狗）
+  - 推荐写法：tryLock(waitTime, timeUnit)
+
+
 
 
 
