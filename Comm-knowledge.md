@@ -215,12 +215,16 @@ nacos不同环境配置文件指定方式
       - 合理性阐述：
         - 先看，类名上的<T>，是有两个作用【1：new时就传入限定类型】；【2：你说的泛型标记】
         - 同样的方法最前的，则是只有【2：你说的泛型标记】 如果没有泛型标记，读到形参的T t 就会有问题，T会被视为Class名；
+  
 - 
+
 - Collections
   - 简单记录
     - TreeSet就是KV没有value的TreeMap； (hashMap和hashSet同理)
     - 
+  
 - 
+
 - **Spring生命周期**
   - 实例化：new
   - 依赖注入：
@@ -234,7 +238,9 @@ nacos不同环境配置文件指定方式
   - 销毁 
     - @PreDestroy / @Destroy 自定义’临终操作‘
     - spring容器销毁Bean
+  
 - 
+
 - ##### Spring Append
   
   - @CahcheAble（16/0525）
@@ -248,9 +254,25 @@ nacos不同环境配置文件指定方式
       - 相关pom依赖引入
   
     - 很简单，唯一补充说明的是，欸屁里k婶 得加@EnableCaching 开启
+  
 - 
-- 基础 **Chain / Filter** 要点
 
+- 基础 **Filter / FilterChain** 要点
+
+  -  Filter：自行继承重写配置过滤操作
+     -  配置方式1：
+        -  通过具体的【@WebFilter("/admin/*") 】类似的写法，实现功能性拦截；
+        -  通过【@Order(顺序整型)】控制先后顺序 （or xml配置顺序）
+     -  配置方式2：
+        -  通过springBoot的@Configuration + @Bean的形式 配置实例
+        -  路由和顺序：通过 Bean方法返回的 return xx.pattern匹配路由.setOrder配置先后顺序...
+     -  配置方法3（微服务）：
+        -  spring.cloud.gateway.routes.【id/ uri/ predicates/ filter(-请求头过滤...；-裁剪路径...)】
+     -  备注（不一定只用某一种，例如3可以和2搭配，3配路由，2配具体定制的鉴权/权限等骚操作）
+  -  FilterChain：无需继承重写，拿出来拦截 or 可触发下一个Filter执行
+  -  OncePerRequestFilter（http请求的filter基本都用这个）:
+     -  含义：一个请求只会触发一次
+     -  意义：避免可能的（重定向/转发）重复触发Filter
   -  
 
 
