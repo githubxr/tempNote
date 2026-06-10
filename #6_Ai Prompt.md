@@ -285,7 +285,7 @@ new PWD：Mail@990803_
 
 
 
-spring.datasource.druid.url 192.168.110.33:3306
+spring.datasource.druid.url
 
 ```
 jdbc:mysql://192.168.110.33:3306/financial?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
